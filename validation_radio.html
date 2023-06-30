@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        span{
+            color: red;
+        }
+    </style>
+    <script>
+        var nm;
+        var data;
+        function validateName()
+        {
+            nm=document.getElementById("nm").value;
+            if(nm==" " || nm.trim().length===0)
+            {
+                document.getElementById("err1").innerHTML="name cannot be blank or space";
+
+                return false;
+            }
+            document.getElementById("err1").innerHTML="";
+            return true;
+        }
+        function validateDegree()
+        {
+            arr=document.getElementsByName("degree")
+            for(i=0;i<arr.length;i++)
+            {
+                if(arr[i].checked)
+                {
+                    data=arr[i].value;
+                    document.getElementById("err2").innerHTML="";
+                    return true;
+                }
+            }
+            document.getElementById("err2").innerHTML="degree should be selected";
+                    return false;
+        }
+        function validate()
+        {
+            var flag=validateName();
+            var flag1=validateDegree();
+            if(flag && flag1)
+            {
+                var str="Name :"+nm+" Degree : "+data;
+                document.getElementById("mydiv").innerHTML=str;
+            }
+            else{
+
+            }
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Enter name:
+    <input type="text" name="nm" id="nm">
+    <span>*</span>
+    <span id="err1"></span>
+    <br>
+    Degree:
+    <input type="radio" name="degree" id="BE" value="BE">
+    <label for="BE">BE</label>
+    <input type="radio" name="degree" id="ME" value="ME">
+    <label for="ME">ME</label>
+    <input type="radio" name="degree" id="BTECH" value="BTECH">
+    <label for="BTECH">BTECH</label>
+    <input type="radio" name="degree" id="MTECH" value="MTECH">
+    <label for="MTECH">MTECH</label>
+    <span>*</span>
+    <span id="err2"></span>
+    <br>
+    <button type="button" name="btn" id="btn" onclick="validate()">validate</button>
+    <div id="mydiv"></div>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        td{
+            font-size: 20px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+        }
+        span
+        {
+            color: red;
+        }
+    </style>
+    <script>
+       
+        var data;
+        function validation(name,errmsg)
+        {
+            
+           var str=document.getElementById(name).value;
+            if(str==="" || (str.trim().length===0))
+            {
+                document.getElementById(errmsg).innerHTML="field the data"
+                return false;
+            }
+            document.getElementById(errmsg).innerHTML=""
+                return true;
+
+        }
+
+        var str=""
+        function validation1(name,errmsg)
+        {
+            str="";
+           str=document.getElementById(name).value;
+            if(str==="" || (str.trim().length===0))
+            {
+                document.getElementById(errmsg).innerHTML="field the data"
+                return false;
+            }
+            document.getElementById(errmsg).innerHTML=""
+                return str;
+
+        }
+        var em="";
+        function validation2(name,errmsg)
+        {
+            em="";
+           em=document.getElementById(name).value;
+            if(str==="" || (str.trim().length===0))
+            {
+                document.getElementById(errmsg).innerHTML="field the data"
+                return false;
+            }
+            document.getElementById(errmsg).innerHTML=""
+                return em;
+
+        }
+
+        var str1=""
+        function validateSkill()
+        {
+            str1="";
+            var cnt=0;
+            var arr=document.getElementsByName('skills');
+            for(i=0;i<arr.length;i++)
+            {
+                if(arr[i].checked)
+                {
+                 str1=str1+arr[i].value+",";
+                 cnt++;
+                }
+            }
+            if(cnt>=3)
+            {
+                document.getElementById("errskill").innerHTML="";
+                str1=str1.slice(0,str1.length-1);
+                return str1;
+            }
+            else
+            {
+                document.getElementById("errskill").innerHTML="minimum 3 skills should be selected!!";
+                return false;
+            }
+        }
+
+            function validateGender()
+            {
+                
+                var arr=document.getElementsByName("gender")
+                for(i=0;i<arr.length;i++)
+                {
+                    if(arr[i].checked)
+                    {
+                        data=arr[i].value;
+                        document.getElementById("errgender").innerHTML="";
+                        return data;
+                    }
+                }
+                document.getElementById("errgender").innerHTML="gender should be selected";
+                        return false;
+            }
+          
+            var city="";
+            function validateCity()
+            {
+                city="";
+                var arr=document.getElementById("city");
+                var pos=arr.selectedIndex;
+                var calc=arr.options[pos].value;
+                //pune  sangli nagpur karad
+               switch(calc)
+               {
+                case "pune":
+                    city="pune";
+                    break;
+                case "sangli":
+                    city="sangli";
+                    break;
+                case "nagpur":
+                    city="nagpur";
+                    break;
+                case "karad":
+                    city="karad";
+                    break;
+               }
+               return city;
+                   
+            }
+        
+
+        function validate()
+        {
+            var flag1=validation1('nm','errnm');
+            var flag2=validation2('email','erremail');
+            var flag3=validation('pass','errpass');
+
+            var flag4=validateSkill();
+            var flag5=validateGender();
+            var flag6=validateCity();
+
+            if(flag1 && flag2 && flag3 && flag4 && flag5 && flag6)
+            {
+                var result="Name : "+str+"<br>Email : "+em+"<br>Skills : "+str1+"<br>Gender : "+data+"<br>City : "+city;
+                document.getElementById("mydiv").innerHTML=result;
+            }
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <table border="2" cellspacing="0px" cellspadding="10px">
+            <tbody>
+
+                <tr>
+                    <td>
+                        <label>Name : </label>
+                    </td>
+                    <td>
+                        <input type="text" name="nm" id="nm">
+                        <span>*</span>
+                        <span id="errnm"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td> Email:</td>
+                    <td>
+                        <input type="text" name="email" id="email">
+                        <span>*</span>
+                        <span id="erremail"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Password : </td>
+                    <td><input type="password" name="pass" id="pass"></td>
+                    <span>*</span>
+                    <span id="errpass"></span>
+                </tr>
+                <tr>
+                    <td>Skills:</td>
+                    <td>
+                        <input type="checkbox" name="skills" id="C++" value="C++">
+                        <label for="C++">C++</label>
+                        <input type="checkbox" name="skills" id="java" value="java">
+                        <label for="java">java</label>
+                        <input type="checkbox" name="skills" id="php" value="php">
+                        <label for="php">php</label>
+                        <input type="checkbox" name="skills" id="C" value="C">
+                        <label for="C">C</label>
+                        <input type="checkbox" name="skills" id="html" value="html">
+                        <label for="html">html</label>
+                        <span>*</span>
+                        <span id="errskill"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Gender:
+                    </td>
+                    <td>
+                        <input type="radio" name="gender" id="male" value="male">
+                        <label for="male">male</label>
+                        <input type="radio" name="gender" id="female" value="female">
+                        <label for="female">female</label>
+                        <span>*</span>
+                        <span id="errgender"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>City</td>
+                    <td>
+                        <select name="city" id="city">
+                            <option value="pune">pune</option>
+                            <option value="sangli">sangli</option>
+                            <option value="nagpur">nagpur</option>
+                            <option value="karad">karad</option>
+                           
+                        </select>
+                        <span>*</span>
+                        <span id="errcty"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="button" name="btn" id="btn" onclick="validate()">Submit</button>
+                    </td>
+                </tr>
+
+            </tbody>
+            
+        </table>
+        <div id="mydiv"></div>
+
+    </form>
+</body>
+</html>

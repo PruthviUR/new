@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        var str=""
+        function validation()
+        {
+            str="";
+            var cnt=0;
+            var arr=document.getElementsByName("skills")
+            for(i=0;i<arr.length;i++)
+            {
+                if(arr[i].checked)
+                {
+                    str+=arr[i].value+",";
+                    cnt++;
+                }
+            }
+            if(cnt>=3)
+            {
+                document.getElementById("errmsg").innerHTML="";
+                str=str.slice(0,str.length-1);
+                document.getElementById("mydiv").innerHTML=str;
+                return true;
+            }
+            else{
+                document.getElementById("errmsg").innerHTML="minimum 3 skills should be selected!!";
+                return false;
+            }
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="checkbox" name="skills" id="java" value="java">
+    <label for="java">java</label>
+
+    <input type="checkbox" name="skills" id="c++" value="c++">
+    <label for="c++">c++</label>
+
+    <input type="checkbox" name="skills" id="python" value="python">
+    <label for="python">python</label>
+    <input type="checkbox" name="skills" id="c" value="c">
+    <label for="c">c</label>
+    <input type="checkbox" name="skills" id="dbms" value="dbms">
+    <label for="dbms">dbms</label>
+    <span>*</span>
+    <span id="errmsg"></span>
+    <button type="button" name="btn" id="btn" onclick="validation()">show skills</button>
+    <br>
+    <div id="mydiv"></div>
+</body>
+</html>
